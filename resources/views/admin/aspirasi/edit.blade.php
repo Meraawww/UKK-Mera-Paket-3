@@ -144,6 +144,13 @@
         <strong>Dibuat:</strong> {{ $aspirasi->created_at->format('d M Y H:i') }}
     </div>
 
+    @if($aspirasi->inputAspirasi && $aspirasi->inputAspirasi->foto_pendukung)
+        <div class="form-group">
+            <label class="form-label">Foto Pendukung</label>
+            <img src="{{ asset('storage/'.$aspirasi->inputAspirasi->foto_pendukung) }}" alt="Foto Pendukung" style="width:100%; max-width:420px; border-radius:12px; border:1px solid #e0e6ed;" />
+        </div>
+    @endif
+
     @if($errors->any())
         <div class="alert-danger">
             <strong>Oops! Ada kesalahan:</strong>

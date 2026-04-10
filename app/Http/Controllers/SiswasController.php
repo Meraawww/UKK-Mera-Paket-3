@@ -69,13 +69,20 @@ class SiswasController extends Controller
             'id_kategori' => 'required|exists:kategoris,id_kategori',
             'lokasi' => 'required|string|max:50',
             'ket' => 'required|string',
+            'foto_pendukung' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+
+        $fotoPath = null;
+        if ($request->hasFile('foto_pendukung')) {
+            $fotoPath = $request->file('foto_pendukung')->store('aspirasi', 'public');
+        }
 
         $input = InputAspirasi::create([
             'nis' => $siswa->nis,
             'id_kategori' => $validated['id_kategori'],
             'lokasi' => $validated['lokasi'],
             'ket' => $validated['ket'],
+            'foto_pendukung' => $fotoPath,
         ]);
 
         Aspirasi::updateOrCreate(

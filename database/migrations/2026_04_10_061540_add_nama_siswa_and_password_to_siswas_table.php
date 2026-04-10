@@ -12,8 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('siswas', function (Blueprint $table) {
-            $table->string('nama_siswa');
-            $table->string('password');
+            if (!Schema::hasColumn('siswas', 'nama_siswa')) {
+                $table->string('nama_siswa');
+            }
+            if (!Schema::hasColumn('siswas', 'password')) {
+                $table->string('password');
+            }
         });
     }
 
@@ -23,7 +27,12 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('siswas', function (Blueprint $table) {
-            $table->dropColumn(['nama_siswa', 'password']);
+            if (Schema::hasColumn('siswas', 'nama_siswa')) {
+                $table->dropColumn('nama_siswa');
+            }
+            if (Schema::hasColumn('siswas', 'password')) {
+                $table->dropColumn('password');
+            }
         });
     }
 };

@@ -583,6 +583,11 @@
                                         <p class="mb-3"><strong>Status:</strong> <span class="status-chip status-{{ $status }}">{{ strtoupper($status) }}</span></p>
                                         <p class="mb-0"><strong>Keterangan:</strong></p>
                                         <p class="text-muted mt-2">{{ $item->ket }}</p>
+                                        @if($item->foto_pendukung)
+                                            <div class="mb-3" style="border-radius:18px; overflow:hidden;">
+                                                <img src="{{ asset('storage/'.$item->foto_pendukung) }}" alt="Foto Pendukung" style="width:100%; height:auto; display:block;" />
+                                            </div>
+                                        @endif
                                         <div class="feedback-box">
                                             <strong>Feedback Admin</strong>
                                             <p>{{ $feedback ?: 'Belum ada feedback dari admin untuk laporan ini.' }}</p>

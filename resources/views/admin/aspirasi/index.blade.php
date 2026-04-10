@@ -172,6 +172,14 @@
         letter-spacing: 0.5px;
     }
 
+    .foto-thumb {
+        width: 60px;
+        height: 40px;
+        object-fit: cover;
+        border-radius: 8px;
+        border: 1px solid #e0e6ed;
+    }
+
     .status-menunggu {
         background-color: #fef3cd;
         color: #856404;
@@ -427,6 +435,7 @@
                     <th>Tanggal</th>
                     <th>Lokasi</th>
                     <th>Keterangan</th>
+                    <th>Foto</th>
                     <th>Status</th>
                     <th>Aksi</th>
                 </tr>
@@ -448,6 +457,13 @@
                         <td>{{ $aspirasi->created_at->format('d M Y') }}</td>
                         <td>{{ $inputAspirasi ? $inputAspirasi->lokasi : '-' }}</td>
                         <td>{{ Str::limit($inputAspirasi ? $inputAspirasi->ket : $aspirasi->feedback, 40) ?? '-' }}</td>
+                        <td>
+                            @if($inputAspirasi && $inputAspirasi->foto_pendukung)
+                                <img src="{{ asset('storage/'.$inputAspirasi->foto_pendukung) }}" alt="Foto Pendukung" class="foto-thumb" />
+                            @else
+                                <span style="color:#6c7d92; font-size:12px;">Tidak ada</span>
+                            @endif
+                        </td>
                         <td><span class="status-badge status-{{ $aspirasi->status }}">{{ ucfirst($aspirasi->status) }}</span></td>
                         <td>
                             <a href="{{ route('admin.aspirasi.edit', $aspirasi) }}" class="btn-update">Update</a>

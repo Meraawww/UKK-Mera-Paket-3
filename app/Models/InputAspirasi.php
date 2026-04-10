@@ -8,7 +8,7 @@ class InputAspirasi extends Model
 {
     protected $table = 'input_aspirases';
     protected $primaryKey = 'id_pelaporan';
-    protected $fillable = ['nis','id_kategori','lokasi','ket'];
+    protected $fillable = ['nis','id_kategori','lokasi','ket','foto_pendukung'];
 
     public function siswa()
     {

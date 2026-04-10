@@ -362,7 +362,7 @@
             <h2>Pusat Aspirasi Siswa</h2>
             <p>Sampaikan keluhan atau saran mengenai sarana dan prasarana sekolah untuk kenyamanan belajar bersama.</p>
 
-            <form action="{{ route('siswa.aspirasi.store') }}" method="POST">
+            <form action="{{ route('siswa.aspirasi.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-4">
                     <label class="form-label">Kategori Sarana</label>
@@ -386,7 +386,8 @@
 
                 <div class="attach-box">
                     <i class="fas fa-camera"></i>
-                    Lampirkan Foto Pendukung (Opsional)
+                    <p>Lampirkan Foto Pendukung (Opsional)</p>
+                    <input type="file" name="foto_pendukung" accept="image/*" style="margin-top: 12px;" />
                 </div>
 
                 <button type="submit" class="btn-submit">Kirim Aspirasi</button>
