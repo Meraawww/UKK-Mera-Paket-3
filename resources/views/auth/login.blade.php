@@ -1,62 +1,76 @@
 @extends('layouts.app')
 
+@section('no-navbar', true)
 @section('body-class', 'login-page')
+@section('main-class', 'p-0')
 @section('title', 'Login')
 
 @push('styles')
 <style>
     body.login-page {
-        background: #f4f7fb;
+        background: #f8fafc;
     }
-    .login-shell {
-        min-height: calc(100vh - 0px);
+    .login-header-bar {
+        background: transparent;
+        padding: 28px 32px 0;
+    }
+    .login-header-bar .brand {
+        font-weight: 700;
+        letter-spacing: .02em;
+        color: #0f172a;
+    }
+    .login-header-bar .brand span {
+        color: #2563eb;
+    }
+    .login-header-bar .nav-links {
+        gap: 24px;
+    }
+    .login-main {
+        min-height: calc(100vh - 88px);
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 40px 0;
+        padding: 20px;
     }
     .login-card {
         border: none;
-        border-radius: 24px;
-        box-shadow: 0 24px 80px rgba(15, 23, 42, 0.08);
+        border-radius: 28px;
+        box-shadow: 0 30px 80px rgba(15, 23, 42, 0.08);
         overflow: hidden;
     }
     .login-card-body {
-        padding: 40px 36px;
+        padding: 42px 38px;
     }
-    .login-header {
-        margin-bottom: 32px;
-    }
-    .login-header h1 {
+    .login-title {
+        margin-bottom: 10px;
         font-size: 32px;
         font-weight: 700;
-        margin-bottom: 8px;
+        color: #0f172a;
     }
-    .login-header p {
-        color: #667085;
-        margin-bottom: 0;
+    .login-subtitle {
+        margin-bottom: 36px;
+        color: #475569;
     }
-    .form-control {
-        border-radius: 16px;
-        background: #f8fafc;
-        border: 1px solid #e2e8f0;
-        height: 54px;
-    }
+    .form-control,
     .form-select {
         border-radius: 16px;
-        background: #f8fafc;
+        background: #f1f5f9;
         border: 1px solid #e2e8f0;
-        height: 54px;
+        height: 56px;
+    }
+    .form-label {
+        font-weight: 600;
+        color: #475569;
     }
     .btn-login {
         border-radius: 16px;
-        padding: 14px 24px;
+        height: 56px;
         font-weight: 700;
         letter-spacing: .02em;
     }
     .login-footer {
         text-align: center;
-        margin-top: 18px;
+        margin-top: 22px;
     }
     .login-footer a {
         color: #2563eb;
@@ -69,16 +83,28 @@
 @endpush
 
 @section('content')
-<div class="login-shell">
+<div class="login-header-bar d-flex align-items-center justify-content-between">
+    <div class="brand">
+        <span>APLIKASI</span> SARANA SEKOLAH
+    </div>
+    <div class="d-none d-md-flex nav-links align-items-center text-muted">
+        <a href="#" class="text-decoration-none text-muted">Dashboard</a>
+        <a href="#" class="text-decoration-none text-muted">My Reports</a>
+        <a href="#" class="text-decoration-none text-muted">Submit</a>
+        <button class="btn btn-outline-secondary btn-sm rounded-pill px-3">Login</button>
+    </div>
+</div>
+<div class="login-main">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-5 col-md-7">
+            <div class="col-xl-4 col-lg-5 col-md-8">
                 <div class="card login-card">
                     <div class="login-card-body">
-                        <div class="login-header text-center">
-                            <h1>Selamat Datang</h1>
-                            <p>Silakan masuk ke akun Anda</p>
+                        <div class="text-center mb-4">
+                            <h1 class="login-title">Selamat Datang</h1>
+                            <p class="login-subtitle">Silakan masuk ke akun Anda</p>
                         </div>
+
                         @if($errors->any())
                             <div class="alert alert-danger">
                                 <ul class="mb-0">
@@ -93,25 +119,27 @@
                                 {{ session('error') }}
                             </div>
                         @endif
+
                         <form method="POST" action="{{ route('admin.login') }}">
                             @csrf
                             <div class="mb-4">
-                                <label for="username" class="form-label text-uppercase text-muted small">Username</label>
+                                <label for="username" class="form-label">USERNAME</label>
                                 <input type="text" class="form-control" id="username" name="username" placeholder="Masukkan username" required>
                             </div>
                             <div class="mb-4">
-                                <label for="role" class="form-label text-uppercase text-muted small">Peran Pengguna</label>
+                                <label for="role" class="form-label">PERAN PENGGUNA</label>
                                 <select id="role" class="form-select" disabled>
                                     <option selected>Siswa</option>
                                 </select>
                             </div>
                             <div class="mb-4">
-                                <label for="password" class="form-label text-uppercase text-muted small">Password</label>
+                                <label for="password" class="form-label">PASSWORD</label>
                                 <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan password" required>
                             </div>
-                            <button type="submit" class="btn btn-primary w-100 btn-login">Login</button>
+                            <button type="submit" class="btn btn-primary w-100 btn-login">LOGIN</button>
                         </form>
-                        <div class="login-footer mt-4">
+
+                        <div class="login-footer">
                             <a href="#">Lupa Password?</a>
                         </div>
                     </div>
