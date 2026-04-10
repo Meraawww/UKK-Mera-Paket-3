@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class InputAspirasi extends Model
 {
+    protected $table = 'input_aspirases';
     protected $primaryKey = 'id_pelaporan';
     protected $fillable = ['nis','id_kategori','lokasi','ket'];
 
@@ -22,5 +23,10 @@ class InputAspirasi extends Model
     public function aspirasi()
     {
         return $this->hasOne(Aspirasi::class, 'id_aspirasi', 'id_pelaporan');
+    }
+
+    public static function countToday()
+    {
+        return static::whereDate('created_at', today())->count();
     }
 }

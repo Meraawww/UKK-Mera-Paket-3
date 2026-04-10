@@ -123,14 +123,15 @@
                         <form method="POST" action="{{ route('admin.login') }}">
                             @csrf
                             <div class="mb-4">
-                                <label for="username" class="form-label">USERNAME</label>
-                                <input type="text" class="form-control" id="username" name="username" placeholder="Masukkan username" required>
+                                <label for="role" class="form-label">PERAN PENGGUNA</label>
+                                <select id="role" name="role" class="form-select" required onchange="updatePlaceholder()">
+                                    <option value="siswa" selected>Siswa</option>
+                                    <option value="admin">Admin</option>
+                                </select>
                             </div>
                             <div class="mb-4">
-                                <label for="role" class="form-label">PERAN PENGGUNA</label>
-                                <select id="role" class="form-select" disabled>
-                                    <option selected>Siswa</option>
-                                </select>
+                                <label for="username" class="form-label"><span id="username-label">NIS</span></label>
+                                <input type="text" class="form-control" id="username" name="username" placeholder="Masukkan NIS Anda" required>
                             </div>
                             <div class="mb-4">
                                 <label for="password" class="form-label">PASSWORD</label>
@@ -138,6 +139,22 @@
                             </div>
                             <button type="submit" class="btn btn-primary w-100 btn-login">LOGIN</button>
                         </form>
+
+                        <script>
+                            function updatePlaceholder() {
+                                const roleSelect = document.getElementById('role');
+                                const usernameInput = document.getElementById('username');
+                                const usernameLabel = document.getElementById('username-label');
+
+                                if (roleSelect.value === 'admin') {
+                                    usernameLabel.textContent = 'USERNAME';
+                                    usernameInput.placeholder = 'Masukkan username';
+                                } else {
+                                    usernameLabel.textContent = 'NIS';
+                                    usernameInput.placeholder = 'Masukkan NIS Anda';
+                                }
+                            }
+                        </script>
 
                         <div class="login-footer">
                             <a href="#">Lupa Password?</a>
